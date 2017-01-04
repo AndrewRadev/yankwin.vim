@@ -4,6 +4,5 @@ end
 
 desc "Prepare archive for deployment"
 task :archive do
-  puts "TODO"
-  # sh 'zip -r ~/pastewin.zip doc/pastewin.txt'
+  sh 'zip -r ~/pastewin.zip autoload/ doc/pastewin.txt plugin/'
 end

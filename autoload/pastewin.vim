@@ -1,4 +1,4 @@
-function! pastewin#DeleteWindow(params)
+function! pastewin#Delete(params)
   let path_type = a:params.path_type
 
   if expand('%') == ''
@@ -21,7 +21,7 @@ function! pastewin#DeleteWindow(params)
   quit
 endfunction
 
-function! pastewin#YankWindow(params)
+function! pastewin#Yank(params)
   let path_type        = a:params.path_type
   let with_line_number = a:params.with_line_number
 
@@ -46,7 +46,7 @@ function! pastewin#YankWindow(params)
   echomsg 'Pastewin: Yanked "'.@@.'" to clipboard'
 endfunction
 
-function! pastewin#PasteWindow(params)
+function! pastewin#Paste(params)
   let register = s:GetRegisterName()
 
   let edit_command = a:params.edit_command

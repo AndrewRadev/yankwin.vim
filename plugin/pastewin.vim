@@ -6,24 +6,30 @@ let g:loaded_pastewin = '0.0.1' " version number
 let s:keepcpo = &cpo
 set cpo&vim
 
+if !exists('g:pastewin_default_mappings')
+  let g:pastewin_default_mappings = 1
+endif
+
 " TODO (2016-12-23) Safeguards for "this doesn't look like a file?"
+" TODO (2017-01-04) Custom formats for pasting (github urls)
 
-nnoremap <c-w>d  :call pastewin#DeleteWindow({'path_type': 'relative', 'with_line_number': 0})<cr>
-nnoremap <c-w>gd :call pastewin#DeleteWindow({'path_type': 'absolute', 'with_line_number': 0})<cr>
-nnoremap <c-w>D  :call pastewin#DeleteWindow({'path_type': 'relative', 'with_line_number': 1})<cr>
-nnoremap <c-w>gD :call pastewin#DeleteWindow({'path_type': 'absolute', 'with_line_number': 1})<cr>
+if g:pastewin_default_mappings
+  nnoremap <c-w>d  :call pastewin#Delete({'path_type': 'relative', 'with_line_number': 0})<cr>
+  nnoremap <c-w>gd :call pastewin#Delete({'path_type': 'absolute', 'with_line_number': 0})<cr>
+  nnoremap <c-w>D  :call pastewin#Delete({'path_type': 'relative', 'with_line_number': 1})<cr>
+  nnoremap <c-w>gD :call pastewin#Delete({'path_type': 'absolute', 'with_line_number': 1})<cr>
 
-nnoremap <c-w>y  :call pastewin#YankWindow({'path_type': 'relative', 'with_line_number': 0})<cr>
-nnoremap <c-w>gy :call pastewin#YankWindow({'path_type': 'absolute', 'with_line_number': 0})<cr>
-nnoremap <c-w>Y  :call pastewin#YankWindow({'path_type': 'relative', 'with_line_number': 1})<cr>
-nnoremap <c-w>gY :call pastewin#YankWindow({'path_type': 'absolute', 'with_line_number': 1})<cr>
+  nnoremap <c-w>y  :call pastewin#Yank({'path_type': 'relative', 'with_line_number': 0})<cr>
+  nnoremap <c-w>gy :call pastewin#Yank({'path_type': 'absolute', 'with_line_number': 0})<cr>
+  nnoremap <c-w>Y  :call pastewin#Yank({'path_type': 'relative', 'with_line_number': 1})<cr>
+  nnoremap <c-w>gY :call pastewin#Yank({'path_type': 'absolute', 'with_line_number': 1})<cr>
 
-nnoremap <c-w><c-p> :call pastewin#PasteWindow({'edit_command': 'edit'})<cr>
-nnoremap <c-w>p     :call pastewin#PasteWindow({'edit_command': 'leftabove split'})<cr>
-nnoremap <c-w>P     :call pastewin#PasteWindow({'edit_command': 'rightbelow split'})<cr>
-nnoremap <c-w>gp    :call pastewin#PasteWindow({'edit_command': '-tab split'})<cr>
-nnoremap <c-w>gP    :call pastewin#PasteWindow({'edit_command': 'tab split'})<cr>
-
+  nnoremap <c-w><c-p> :call pastewin#Paste({'edit_command': 'edit'})<cr>
+  nnoremap <c-w>p     :call pastewin#Paste({'edit_command': 'leftabove split'})<cr>
+  nnoremap <c-w>P     :call pastewin#Paste({'edit_command': 'rightbelow split'})<cr>
+  nnoremap <c-w>gp    :call pastewin#Paste({'edit_command': '-tab split'})<cr>
+  nnoremap <c-w>gP    :call pastewin#Paste({'edit_command': 'tab split'})<cr>
+endif
 
 let &cpo = s:keepcpo
 unlet s:keepcpo

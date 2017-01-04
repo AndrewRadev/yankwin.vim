@@ -1,4 +1,4 @@
-*pastewin.txt*	TODO
+*pastewin.txt*	Yank and paste windows around
 
 ==============================================================================
 CONTENTS                                        *pastewin*   *pastewin-contents*
@@ -6,7 +6,6 @@ CONTENTS                                        *pastewin*   *pastewin-contents*
     Installation................................: |pastewin-installation|
     Usage.......................................: |pastewin-usage|
     Settings....................................: |pastewin-settings|
-    Internals...................................: |pastewin-internals|
     Issues......................................: |pastewin-issues|
 
 
@@ -27,7 +26,7 @@ The command is (provided you're in ~/.vim):
 <
 
 Another way is to simply copy all the essential directories inside the ~/.vim
-directory: TODO list of directories
+directory: autoload, doc, plugin.
 
 
 ==============================================================================
@@ -36,16 +35,38 @@ USAGE                                                          *pastewin-usage*
 TODO
 
 
+TODO Describe mapping conflicts
+
+
 ==============================================================================
 SETTINGS                                                    *pastewin-settings*
 
-TODO
+                                                   *g:pastewin_default_mappings*
+>
+    let g:pastewin_default_mappings = 0
+<
+Default value: 1
 
+Set this to 0 to disable the built-in mappings, allowing you to set your own.
+Here's a complete list of them -- change the left-hand sides to whatever set
+of mappings you prefer:
+>
+    nnoremap <c-w>d  :call pastewin#Delete({'path_type': 'relative', 'with_line_number': 0})<cr>
+    nnoremap <c-w>gd :call pastewin#Delete({'path_type': 'absolute', 'with_line_number': 0})<cr>
+    nnoremap <c-w>D  :call pastewin#Delete({'path_type': 'relative', 'with_line_number': 1})<cr>
+    nnoremap <c-w>gD :call pastewin#Delete({'path_type': 'absolute', 'with_line_number': 1})<cr>
 
-==============================================================================
-INTERNALS                                                  *pastewin-internals*
+    nnoremap <c-w>y  :call pastewin#Yank({'path_type': 'relative', 'with_line_number': 0})<cr>
+    nnoremap <c-w>gy :call pastewin#Yank({'path_type': 'absolute', 'with_line_number': 0})<cr>
+    nnoremap <c-w>Y  :call pastewin#Yank({'path_type': 'relative', 'with_line_number': 1})<cr>
+    nnoremap <c-w>gY :call pastewin#Yank({'path_type': 'absolute', 'with_line_number': 1})<cr>
 
-TODO
+    nnoremap <c-w><c-p> :call pastewin#Paste({'edit_command': 'edit'})<cr>
+    nnoremap <c-w>p     :call pastewin#Paste({'edit_command': 'leftabove split'})<cr>
+    nnoremap <c-w>P     :call pastewin#Paste({'edit_command': 'rightbelow split'})<cr>
+    nnoremap <c-w>gp    :call pastewin#Paste({'edit_command': '-tab split'})<cr>
+    nnoremap <c-w>gP    :call pastewin#Paste({'edit_command': 'tab split'})<cr>
+<
 
 ==============================================================================
 ISSUES                                                        *pastewin-issues*
