@@ -40,6 +40,7 @@ describe "Yanking windows" do
       vim.command 'edit first.txt'
       vim.normal 'ggdG'
       vim.insert 'one<cr>two<cr>three'
+      vim.write
       vim.search 'two'
     end
 

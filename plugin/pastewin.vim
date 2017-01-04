@@ -8,8 +8,10 @@ set cpo&vim
 
 " TODO (2016-12-23) Safeguards for "this doesn't look like a file?"
 
-nnoremap <c-w>d  :call pastewin#DeleteWindow({'path_type': 'relative'})<cr>
-nnoremap <c-w>gd :call pastewin#DeleteWindow({'path_type': 'absolute'})<cr>
+nnoremap <c-w>d  :call pastewin#DeleteWindow({'path_type': 'relative', 'with_line_number': 0})<cr>
+nnoremap <c-w>gd :call pastewin#DeleteWindow({'path_type': 'absolute', 'with_line_number': 0})<cr>
+nnoremap <c-w>D  :call pastewin#DeleteWindow({'path_type': 'relative', 'with_line_number': 1})<cr>
+nnoremap <c-w>gD :call pastewin#DeleteWindow({'path_type': 'absolute', 'with_line_number': 1})<cr>
 
 nnoremap <c-w>y  :call pastewin#YankWindow({'path_type': 'relative', 'with_line_number': 0})<cr>
 nnoremap <c-w>gy :call pastewin#YankWindow({'path_type': 'absolute', 'with_line_number': 0})<cr>

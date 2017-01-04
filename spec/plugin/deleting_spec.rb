@@ -25,19 +25,15 @@ describe "Deleting windows" do
     specify "relative path" do
       vim.feedkeys '\<c-w>d'
 
-      expect(get_buffer_list).to eq ['first.txt']
-
-      register_contents = get_register('"')
-      expect(register_contents).to eq 'second.txt'
+      expect(get_windows).to eq ['first.txt']
+      expect(get_register('"')).to eq 'second.txt'
     end
 
     specify "absolute path" do
       vim.feedkeys '\<c-w>gd'
 
-      expect(get_buffer_list).to eq ['first.txt']
-
-      register_contents = get_register('"')
-      expect(register_contents).to eq File.expand_path('second.txt')
+      expect(get_windows).to eq ['first.txt']
+      expect(get_register('"')).to eq File.expand_path('second.txt')
     end
   end
 
@@ -50,19 +46,40 @@ describe "Deleting windows" do
     specify "relative path" do
       vim.feedkeys '\<c-w>d'
 
-      expect(get_buffer_list).to eq ['first.txt']
-
-      register_contents = get_register('"')
-      expect(register_contents).to eq 'second.txt'
+      expect(get_windows).to eq ['first.txt']
+      expect(get_register('"')).to eq 'second.txt'
     end
 
     specify "absolute path" do
       vim.feedkeys '\<c-w>gd'
 
-      expect(get_buffer_list).to eq ['first.txt']
+      expect(get_windows).to eq ['first.txt']
+      expect(get_register('"')).to eq File.expand_path('second.txt')
+    end
+  end
+
+  context "with line numbers" do
+    before :each do
+      vim.command 'edit first.txt'
+      vim.command 'split second.txt'
+      vim.normal 'ggdG'
+      vim.insert 'one<cr>two<cr>three'
+      vim.write
+      vim.search 'two'
+    end
+
+    specify "relative path with line numbers" do
+      vim.feedkeys '\<c-w>D'
 
       register_contents = get_register('"')
-      expect(register_contents).to eq File.expand_path('second.txt')
+      expect(register_contents).to eq 'second.txt:2'
+    end
+
+    specify "absolute path with line numbers" do
+      vim.feedkeys '\<c-w>gD'
+
+      register_contents = get_register('"')
+      expect(register_contents).to eq File.expand_path('second.txt:2')
     end
   end
 end
