@@ -10,6 +10,16 @@ if !exists('g:pastewin_default_mappings')
   let g:pastewin_default_mappings = 1
 endif
 
+if !exists('g:pastewin_paste_processors')
+  " TODO (2017-01-04) Real github url
+  " TODO (2017-01-04) "Default" and "custom" processors
+
+  let g:pastewin_paste_processors = {
+        \ 'http://github.com/\(.\{-}\)\%(#L\(\d\+\)\)\=$': {'path': '\1', 'line': '\2'},
+        \ '^\(.\{-}\):\(\d\+\)\%(:\(\d\+\)\)\=': {'path': '\1', 'line': '\2', 'col': '\3'},
+        \ }
+endif
+
 " TODO (2016-12-23) Safeguards for "this doesn't look like a file?"
 " TODO (2017-01-04) Custom formats for pasting (github urls)
 

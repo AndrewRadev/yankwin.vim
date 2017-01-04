@@ -50,7 +50,15 @@ function! pastewin#Paste(params)
   let register = s:GetRegisterName()
 
   let edit_command = a:params.edit_command
-  exe edit_command.' '.getreg(register)
+  let [path, line, col] = s:PrePasteProcess(getreg(register))
+
+  exe edit_command.' '.path
+  if line != ''
+    exe line
+  endif
+  if col != ''
+    exe 'normal! 0'.col.'|'
+  endif
 endfunction
 
 function! s:GetRegisterName()
@@ -91,4 +99,32 @@ function! s:SynchronizeClipboards()
   if index(clipboard_setting, 'unnamedplus') >= 0
     call setreg('+', @@)
   endif
+endfunction
+
+function! s:PrePasteProcess(text)
+  let path = a:text
+  let line = ''
+  let col = ''
+
+  for [pattern, processor] in items(g:pastewin_paste_processors)
+    let match = matchstr(path, pattern)
+
+    if match != ''
+      if has_key(processor, 'path')
+        let path = substitute(match, pattern, processor.path, '')
+      endif
+
+      if has_key(processor, 'line')
+        let line = substitute(match, pattern, processor.line, '')
+      endif
+
+      if has_key(processor, 'col')
+        let col = substitute(match, pattern, processor.col, '')
+      endif
+
+      break
+    endif
+  endfor
+
+  return [path, line, col]
 endfunction
