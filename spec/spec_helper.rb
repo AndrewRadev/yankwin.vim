@@ -16,4 +16,11 @@ end
 
 RSpec.configure do |config|
   config.include Support::Vim
+
+  config.before :each do
+    # Reset window state before each test
+    vim.command 'new'
+    vim.command 'only'
+    vim.command 'tabonly'
+  end
 end

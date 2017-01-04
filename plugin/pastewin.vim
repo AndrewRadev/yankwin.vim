@@ -26,27 +26,33 @@ nnoremap <c-w>gP    :call <SID>PasteWindow({'edit_command': 'tab split'})<cr>
 function! s:DeleteWindow(params)
   let path_type = a:params.path_type
 
+  let register = v:register
+  if register == '+' || register == '*'
+    " We set those registers manually
+    let register = '"'
+  endif
+
   if expand('%') == ''
     return
   endif
 
   if path_type == 'relative'
-    let @@ = expand('%:~:.')
+    let path = expand('%:~:.')
   elseif path_type == 'absolute'
-    let @@ = expand('%:p')
+    let path = expand('%:p')
   else
     echoerr "Pastewin: Unknown value for path_type: ".path_type
     return
   endif
 
+  call setreg(register, path)
+
   let clipboard_setting = split(&clipboard)
-
-  if index(clipboard_setting, 'unnamed') >= 0
-    let @* = @@
+  if register == '"' && index(clipboard_setting, 'unnamed') >= 0
+    call setreg('*', @@)
   endif
-
-  if index(clipboard_setting, 'unnamedplus') >= 0
-    let @+ = @@
+  if register == '"' && index(clipboard_setting, 'unnamedplus') >= 0
+    call setreg('+', @@)
   endif
 
   echomsg 'Pastewin: Yanked "'.@@.'" to clipboard'
@@ -56,6 +62,12 @@ endfunction
 function! s:YankWindow(params)
   let path_type        = a:params.path_type
   let with_line_number = a:params.with_line_number
+
+  let register = v:register
+  if register == '+' || register == '*'
+    " We set those registers manually
+    let register = '"'
+  endif
 
   if expand('%') == ''
     echomsg "Pastewin: No buffer to yank"
@@ -73,8 +85,17 @@ function! s:YankWindow(params)
 
   if with_line_number
     let @@ = path.':'.line('.')
+    call setreg(register, path.':'.line('.'))
   else
-    let @@ = path
+    call setreg(register, path)
+  endif
+
+  let clipboard_setting = split(&clipboard)
+  if register == '"' && index(clipboard_setting, 'unnamed') >= 0
+    call setreg('*', @@)
+  endif
+  if register == '"' && index(clipboard_setting, 'unnamedplus') >= 0
+    call setreg('+', @@)
   endif
 
   let clipboard_setting = split(&clipboard, ',')
@@ -91,8 +112,14 @@ function! s:YankWindow(params)
 endfunction
 
 function! s:PasteWindow(params)
+  let register = v:register
+  if register == '+' || register == '*'
+    " Those should be synchronized
+    let register = '"'
+  endif
+
   let edit_command = a:params.edit_command
-  exe edit_command.' '.@@
+  exe edit_command.' '.getreg(register)
 endfunction
 
 let &cpo = s:keepcpo
