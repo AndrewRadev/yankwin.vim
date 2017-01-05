@@ -9,7 +9,7 @@ describe "Pasting windows" do
 
     specify "in the current window" do
       vim.feedkeys '\<c-w>\<c-p>'
-      expect(get_tab_pages).to eq ['second.txt']
+      expect(get_windows).to eq ['second.txt']
     end
 
     specify "to a split above" do

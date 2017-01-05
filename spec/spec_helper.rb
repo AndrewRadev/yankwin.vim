@@ -22,5 +22,6 @@ RSpec.configure do |config|
     vim.command 'new'
     vim.command 'only'
     vim.command 'tabonly'
+    vim.command 'set clipboard='
   end
 end

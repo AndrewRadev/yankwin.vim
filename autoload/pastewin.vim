@@ -6,7 +6,7 @@ function! pastewin#Delete(params)
     return
   endif
 
-  let register = s:GetRegisterName()
+  let register = s:GetYankRegisterName()
   let path_description = s:GetPathDescription(a:params)
   if path_description == ''
     return
@@ -25,14 +25,12 @@ function! pastewin#Yank(params)
   let path_type        = a:params.path_type
   let with_line_number = a:params.with_line_number
 
-  let register = s:GetRegisterName()
-
   if expand('%') == ''
     echomsg "Pastewin: No buffer to yank"
     return
   endif
 
-  let register = s:GetRegisterName()
+  let register = s:GetYankRegisterName()
   let path_description = s:GetPathDescription(a:params)
   if path_description == ''
     return
@@ -47,7 +45,7 @@ function! pastewin#Yank(params)
 endfunction
 
 function! pastewin#Paste(params)
-  let register = s:GetRegisterName()
+  let register = v:register
 
   let edit_command = a:params.edit_command
   let [path, line, col] = s:PrePasteProcess(getreg(register))
@@ -61,10 +59,9 @@ function! pastewin#Paste(params)
   endif
 endfunction
 
-function! s:GetRegisterName()
+function! s:GetYankRegisterName()
   if v:register == '+' || v:register == '*'
-    " These should be synchronized upon reading, and we set them manually upon
-    " writing, so just return the unnamed one
+    " We set these manually upon writing, so just return the unnamed one
     return '"'
   else
     return v:register
