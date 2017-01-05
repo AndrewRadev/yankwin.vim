@@ -67,7 +67,7 @@ describe "Pasting windows" do
     end
 
     specify "github url" do
-      set_register('"', 'http://github.com/first.txt#L2')
+      set_register('"', 'https://github.com/user/repo/blob/master/first.txt#L2-L9')
       vim.feedkeys '\<c-w>\<c-p>'
 
       expect(vim.echo('expand("%")')).to eq 'first.txt'

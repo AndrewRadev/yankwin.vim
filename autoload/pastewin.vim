@@ -50,6 +50,13 @@ function! pastewin#Paste(params)
   let edit_command = a:params.edit_command
   let [path, line, col] = s:PrePasteProcess(getreg(register))
 
+  if g:pastewin_only_allow_pasting_paths
+    if path !~ '^\f\+$'
+      echoerr "Doesn't look like a file path: ".path
+      return
+    endif
+  endif
+
   exe edit_command.' '.path
   if line != ''
     exe line
@@ -103,7 +110,11 @@ function! s:PrePasteProcess(text)
   let line = ''
   let col = ''
 
-  for [pattern, processor] in items(g:pastewin_paste_processors)
+  let paste_processors = {}
+  call extend(paste_processors, g:pastewin_paste_processors)
+  call extend(paste_processors, g:pastewin_custom_paste_processors)
+
+  for [pattern, processor] in items(paste_processors)
     let match = matchstr(path, pattern)
 
     if match != ''
