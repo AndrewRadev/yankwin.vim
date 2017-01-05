@@ -68,6 +68,59 @@ of mappings you prefer:
     nnoremap <c-w>gP    :call pastewin#Paste({'edit_command': 'tab split'})<cr>
 <
 
+                                           *g:pastewin_only_allow_pasting_paths*
+>
+    let g:pastewin_only_allow_pasting_paths = 0
+<
+Default value: 1
+
+If this is set to 1 (the default), the plugin will try to guard you from
+accidentally pasting something that isn't a filename. If the contents of the
+register you're pasting from don't look like a filename (Using the 'isfname'
+pattern), the plugin will error out. If this is unreliable for you for some
+reason, set it to 0 to disable the check (and consider opening an issue).
+
+
+                                                   *g:pastewin_paste_processors*
+>
+    let g:pastewin_paste_processors = {
+        \ '\(file\):\(line\):\(col\)': {'path': '\1', 'line': '\2', 'col': '\3'}
+        \ }
+<
+This |dict| contains a set of patterns to match the incoming file path to. If
+any of the patterns matches, the dict it points is used to get the path,
+linenumber and column to jump to.
+
+As an example, if you'd like to paste a filepath like "filename.rb:5:2", which
+would point to the 2nd column of the 5th line of "filename.rb", the plugin
+will parse that and jump to that location in that file. This is done by using
+a substition like the above.
+
+The pattern for that is: `^\(.\{-}\):\(\d\+\)\%(:\(\d\+\)\)\?`
+
+This might seem a bit weird if you're not used to Vim-flavored regex, but
+it is what it is.
+
+If you'd rather the plugin didn't try to be smart, you can set this variable
+to `{}` to avoid any kind of processing on the pasted file path. If you'd like
+to use the existing patterns, and add to them, use the setting
+|g:pastewin_custom_paste_processors|
+
+
+                                            *g:pastewin_custom_paste_processors*
+>
+    let g:pastewin_custom_paste_processors = {
+        \ '\(file\):\(line\):\(col\)': {'path': '\1', 'line': '\2', 'col': '\3'}
+        \ }
+<
+Default value: {}
+
+If you'd like to use the built-in paste processors, and add some of your own,
+you can use this variable. For the syntax of the patterns, either take a look
+at the source code in `plugin/pastewin.vim`, or read above in the explanation
+for |g:pastewin_paste_processors| (ideally, both).
+
+
 ==============================================================================
 ISSUES                                                        *pastewin-issues*
 
