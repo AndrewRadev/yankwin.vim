@@ -62,10 +62,10 @@ of mappings you prefer:
     nnoremap <c-w>gY :call pastewin#Yank({'path_type': 'absolute', 'with_line_number': 1})<cr>
 
     nnoremap <c-w><c-p> :call pastewin#Paste({'edit_command': 'edit'})<cr>
-    nnoremap <c-w>p     :call pastewin#Paste({'edit_command': 'leftabove split'})<cr>
-    nnoremap <c-w>P     :call pastewin#Paste({'edit_command': 'rightbelow split'})<cr>
-    nnoremap <c-w>gp    :call pastewin#Paste({'edit_command': '-tab split'})<cr>
-    nnoremap <c-w>gP    :call pastewin#Paste({'edit_command': 'tab split'})<cr>
+    nnoremap <c-w>p     :call pastewin#Paste({'edit_command': 'rightbelow split'})<cr>
+    nnoremap <c-w>P     :call pastewin#Paste({'edit_command': 'leftabove split'})<cr>
+    nnoremap <c-w>gp    :call pastewin#Paste({'edit_command': 'tab split'})<cr>
+    nnoremap <c-w>gP    :call pastewin#Paste({'edit_command': '-tab split'})<cr>
 <
 
                                             *g:pastewin_default_delete_mappings*
@@ -110,18 +110,18 @@ Here's a complete list of them -- change the left-hand sides to whatever set
 of mappings you prefer:
 >
     nnoremap <c-w><c-p> :call pastewin#Paste({'edit_command': 'edit'})<cr>
-    nnoremap <c-w>p     :call pastewin#Paste({'edit_command': 'leftabove split'})<cr>
-    nnoremap <c-w>P     :call pastewin#Paste({'edit_command': 'rightbelow split'})<cr>
-    nnoremap <c-w>gp    :call pastewin#Paste({'edit_command': '-tab split'})<cr>
-    nnoremap <c-w>gP    :call pastewin#Paste({'edit_command': 'tab split'})<cr>
+    nnoremap <c-w>p     :call pastewin#Paste({'edit_command': 'rightbelow split'})<cr>
+    nnoremap <c-w>P     :call pastewin#Paste({'edit_command': 'leftabove split'})<cr>
+    nnoremap <c-w>gp    :call pastewin#Paste({'edit_command': 'tab split'})<cr>
+    nnoremap <c-w>gP    :call pastewin#Paste({'edit_command': '-tab split'})<cr>
 <
 Note that you can create a different mapping by providing a different
 "edit_command" to the `pastewin#Paste` function. If you wanted to create
 mappings to paste in a vertical split, you could add something like this to
 your vimrc:
 >
-    nnoremap <c-w>vp :call pastewin#Paste({'edit_command': 'leftabove vertical split'})<cr>
-    nnoremap <c-w>vP :call pastewin#Paste({'edit_command': 'rightbelow vertical split'})<cr>
+    nnoremap <c-w>vp :call pastewin#Paste({'edit_command': 'rightbelow vertical split'})<cr>
+    nnoremap <c-w>vP :call pastewin#Paste({'edit_command': 'leftabove vertical split'})<cr>
 <
 
                                            *g:pastewin_only_allow_pasting_paths*

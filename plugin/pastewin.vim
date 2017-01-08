@@ -56,10 +56,10 @@ if g:pastewin_default_mappings
 
   if g:pastewin_default_paste_mappings
     nnoremap <c-w><c-p> :call pastewin#Paste({'edit_command': 'edit'})<cr>
-    nnoremap <c-w>p     :call pastewin#Paste({'edit_command': 'leftabove split'})<cr>
-    nnoremap <c-w>P     :call pastewin#Paste({'edit_command': 'rightbelow split'})<cr>
-    nnoremap <c-w>gp    :call pastewin#Paste({'edit_command': '-tab split'})<cr>
-    nnoremap <c-w>gP    :call pastewin#Paste({'edit_command': 'tab split'})<cr>
+    nnoremap <c-w>p     :call pastewin#Paste({'edit_command': 'rightbelow split'})<cr>
+    nnoremap <c-w>P     :call pastewin#Paste({'edit_command': 'leftabove split'})<cr>
+    nnoremap <c-w>gp    :call pastewin#Paste({'edit_command': 'tab split'})<cr>
+    nnoremap <c-w>gP    :call pastewin#Paste({'edit_command': '-tab split'})<cr>
   endif
 endif
 

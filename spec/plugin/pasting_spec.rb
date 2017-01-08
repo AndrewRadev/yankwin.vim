@@ -13,22 +13,22 @@ describe "Pasting windows" do
     end
 
     specify "to a split above" do
-      vim.feedkeys '\<c-w>p'
+      vim.feedkeys '\<c-w>P'
       expect(get_windows).to eq ['second.txt', 'first.txt']
     end
 
     specify "to a split below" do
-      vim.feedkeys '\<c-w>P'
+      vim.feedkeys '\<c-w>p'
       expect(get_windows).to eq ['first.txt', 'second.txt']
     end
 
     specify "to a previous tab" do
-      vim.feedkeys '\<c-w>gp'
+      vim.feedkeys '\<c-w>gP'
       expect(get_tab_pages).to eq ['second.txt', 'first.txt']
     end
 
     specify "to the next tab" do
-      vim.feedkeys '\<c-w>gP'
+      vim.feedkeys '\<c-w>gp'
       expect(get_tab_pages).to eq ['first.txt', 'second.txt']
     end
 
