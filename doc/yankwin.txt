@@ -210,7 +210,7 @@ of mappings you prefer:
     nnoremap <c-w>p     :call yankwin#Paste({'edit_command': 'rightbelow split'})<cr>
     nnoremap <c-w>P     :call yankwin#Paste({'edit_command': 'leftabove split'})<cr>
     nnoremap <c-w>gp    :call yankwin#Paste({'edit_command': 'tab split'})<cr>
-    nnoremap <c-w>gP    :call yankwin#Paste({'edit_command': '-tab split'})<cr>
+    nnoremap <c-w>gP    :call yankwin#Paste({'edit_command': (tabpagenr() - 1).'tab split'})<cr>
 <
 
                                              *g:yankwin_default_delete_mappings*
@@ -258,7 +258,7 @@ of mappings you prefer:
     nnoremap <c-w>p     :call yankwin#Paste({'edit_command': 'rightbelow split'})<cr>
     nnoremap <c-w>P     :call yankwin#Paste({'edit_command': 'leftabove split'})<cr>
     nnoremap <c-w>gp    :call yankwin#Paste({'edit_command': 'tab split'})<cr>
-    nnoremap <c-w>gP    :call yankwin#Paste({'edit_command': '-tab split'})<cr>
+    nnoremap <c-w>gP    :call yankwin#Paste({'edit_command': (tabpagenr() - 1).'tab split'})<cr>
 <
 Note that you can create a different mapping by providing a different
 "edit_command" to the `yankwin#Paste` function. If you wanted to create

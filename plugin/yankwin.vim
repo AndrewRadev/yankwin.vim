@@ -59,7 +59,7 @@ if g:yankwin_default_mappings
     nnoremap <c-w>p     :call yankwin#Paste({'edit_command': 'rightbelow split'})<cr>
     nnoremap <c-w>P     :call yankwin#Paste({'edit_command': 'leftabove split'})<cr>
     nnoremap <c-w>gp    :call yankwin#Paste({'edit_command': 'tab split'})<cr>
-    nnoremap <c-w>gP    :call yankwin#Paste({'edit_command': '-tab split'})<cr>
+    nnoremap <c-w>gP    :call yankwin#Paste({'edit_command': (tabpagenr() - 1).'tab split'})<cr>
   endif
 endif
 
