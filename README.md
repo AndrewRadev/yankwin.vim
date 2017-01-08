@@ -11,17 +11,17 @@ All the mappings are prefixed with `<c-w>` and attempt to be consistent both int
 - `<c-w>p`:     (pasting) Goes to the last-accessed window
 - `<c-w>P`:     (pasting) Goes to the preview window
 
-If these mappings are important to your workflow, you can disable the overrides, either by setting `g:pastewin_default_mappings` to 0, or by setting any of `g:pastewin_default_paste_mappings`, `g:pastewin_default_yank_mappings`, or `g:pastewin_default_delete_mappings` to 0.
+If these mappings are important to your workflow, you can disable the overrides, either by setting `g:yankwin_default_mappings` to 0, or by setting any of `g:yankwin_default_paste_mappings`, `g:yankwin_default_yank_mappings`, or `g:yankwin_default_delete_mappings` to 0.
 
 For example, if you only care about the yank mappings (which, I find, can be quite useful on their own), you can put this in your .vimrc:
 
 ``` vim
-let g:pastewin_default_yank_mappings   = 1 " optional
-let g:pastewin_default_paste_mappings  = 0
-let g:pastewin_default_delete_mappings = 0
+let g:yankwin_default_yank_mappings   = 1 " optional
+let g:yankwin_default_paste_mappings  = 0
+let g:yankwin_default_delete_mappings = 0
 ```
 
-Check the full documentation for these settings to learn how to define your own, any way you like. If you have a proposal for a better set of window mappings that don't override existing ones (or override ones that are not as useful), feel free to open an issue at https://github.com/AndrewRadev/pastewin.vim/issues.
+Check the full documentation for these settings to learn how to define your own, any way you like. If you have a proposal for a better set of window mappings that don't override existing ones (or override ones that are not as useful), feel free to open an issue at https://github.com/AndrewRadev/yankwin.vim/issues.
 
 ### Deleting and yanking
 
@@ -34,7 +34,7 @@ The only difference between deleting and yanking is whether the window is closed
 
 Basically, a lowercase "y" copies the (relative) path, and an uppercase "Y" copies a path with its file number at the end (this was made to be consistent with `gf` and `gF`). Prefixing with "g" yanks an absolute path instead of a relative one.
 
-In order to disable the built-in yank mappings and use your own, see the documentation for `g:pastewin_default_yank_mappings`.
+In order to disable the built-in yank mappings and use your own, see the documentation for `g:yankwin_default_yank_mappings`.
 
 Deleting has a similar set of mappings with "d" instead of "y":
 
@@ -43,7 +43,7 @@ Deleting has a similar set of mappings with "d" instead of "y":
 - `<c-w>D`:  `foo/bar.txt:5`
 - `<c-w>gD`: `/home/me/foo/bar.txt:5`
 
-In order to disable the built-in delete mappings and use your own, see the documentation for `g:pastewin_default_yank_mappings`.
+In order to disable the built-in delete mappings and use your own, see the documentation for `g:yankwin_default_yank_mappings`.
 
 ### Pasting
 
@@ -55,7 +55,7 @@ The mappings to paste a file path are slightly different than the yanking/deleti
 - `<c-w>gp`:    Pastes in a new tab page, after the current one
 - `<c-w>gP`:    Pastes in a new tab page, before the current one
 
-Note that there are some conflicts with potentially interesting mappings. You might want to read the documentation for `g:pastewin_default_paste_mappings` to learn how to disable these and define your own. You can even define new ones that are not built-in, like ones that open windows in vertical splits.
+Note that there are some conflicts with potentially interesting mappings. You might want to read the documentation for `g:yankwin_default_paste_mappings` to learn how to disable these and define your own. You can even define new ones that are not built-in, like ones that open windows in vertical splits.
 
 ### Registers
 
@@ -63,13 +63,13 @@ All mappings respect the provided register. For example, typing `"a<c-w>y` will 
 
 ### Paste processors
 
-One of the reasons this plugin was created was to enable pasting file paths in different formats, potentially from outside sources into Vim. The plugin provides two settings, `g:pastewin_paste_processors` and `g:pastewin_custom_paste_processors`, that contain a set of definitions for some pre-paste processing of any file paths that are pasted.
+One of the reasons this plugin was created was to enable pasting file paths in different formats, potentially from outside sources into Vim. The plugin provides two settings, `g:yankwin_paste_processors` and `g:yankwin_custom_paste_processors`, that contain a set of definitions for some pre-paste processing of any file paths that are pasted.
 
 By default, pasting a file path that looks like `<filename>:<line>:<column>` will not only open that file, but also jump to the provided line and column. This can be useful when copying a file path from test output, for instance.
 
 Also by default, pasting a github url (something that looks like `http://github.com/blob/<path>#L<line>`) will extract the file path and open it in the given line (if there is one).
 
-If you have ideas for additional processors that might be interesting, you can make them yourself using `g:pastewin_custom_paste_processors`, and/or you could open a github issue with your proposal.
+If you have ideas for additional processors that might be interesting, you can make them yourself using `g:yankwin_custom_paste_processors`, and/or you could open a github issue with your proposal.
 
 ## Why?
 
@@ -89,4 +89,4 @@ The plugin is not complicated, however. If you take a look at the settings, you'
 
 ## Contributing
 
-Pull requests are welcome, but take a look at [CONTRIBUTING.md](https://github.com/AndrewRadev/pastewin.vim/blob/master/CONTRIBUTING.md) first for some guidelines.
+Pull requests are welcome, but take a look at [CONTRIBUTING.md](https://github.com/AndrewRadev/yankwin.vim/blob/master/CONTRIBUTING.md) first for some guidelines.

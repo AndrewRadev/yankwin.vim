@@ -9,7 +9,7 @@ Vimrunner::RSpec.configure do |config|
 
   config.start_vim do
     vim = Vimrunner.start_gvim
-    vim.add_plugin(plugin_path, 'plugin/pastewin.vim')
+    vim.add_plugin(plugin_path, 'plugin/yankwin.vim')
     vim
   end
 end

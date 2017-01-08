@@ -1,4 +1,4 @@
-function! pastewin#Delete(params)
+function! yankwin#Delete(params)
   let path_type = a:params.path_type
 
   if expand('%') == ''
@@ -17,16 +17,16 @@ function! pastewin#Delete(params)
     call s:SynchronizeClipboards()
   endif
 
-  echomsg 'Pastewin: Yanked "'.@@.'" to clipboard'
+  echomsg 'Yankwin: Yanked "'.@@.'" to clipboard'
   quit
 endfunction
 
-function! pastewin#Yank(params)
+function! yankwin#Yank(params)
   let path_type        = a:params.path_type
   let with_line_number = a:params.with_line_number
 
   if expand('%') == ''
-    echomsg "Pastewin: No buffer to yank"
+    echomsg "Yankwin: No buffer to yank"
     return
   endif
 
@@ -41,16 +41,16 @@ function! pastewin#Yank(params)
     call s:SynchronizeClipboards()
   endif
 
-  echomsg 'Pastewin: Yanked "'.@@.'" to clipboard'
+  echomsg 'Yankwin: Yanked "'.@@.'" to clipboard'
 endfunction
 
-function! pastewin#Paste(params)
+function! yankwin#Paste(params)
   let register = v:register
 
   let edit_command = a:params.edit_command
   let [path, line, col] = s:PrePasteProcess(getreg(register))
 
-  if g:pastewin_only_allow_pasting_paths
+  if g:yankwin_only_allow_pasting_paths
     if path !~ '^\f\+$'
       echoerr "Doesn't look like a file path: ".path
       return
@@ -84,7 +84,7 @@ function! s:GetPathDescription(params)
   elseif path_type == 'absolute'
     let path_description = expand('%:p')
   else
-    echoerr "Pastewin: Unknown value for path_type: ".path_type
+    echoerr "Yankwin: Unknown value for path_type: ".path_type
     return ''
   endif
 
@@ -111,8 +111,8 @@ function! s:PrePasteProcess(text)
   let col = ''
 
   let paste_processors = {}
-  call extend(paste_processors, g:pastewin_paste_processors)
-  call extend(paste_processors, g:pastewin_custom_paste_processors)
+  call extend(paste_processors, g:yankwin_paste_processors)
+  call extend(paste_processors, g:yankwin_custom_paste_processors)
 
   for [pattern, processor] in items(paste_processors)
     let match = matchstr(path, pattern)
