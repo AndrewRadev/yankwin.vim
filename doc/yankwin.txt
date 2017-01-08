@@ -32,7 +32,7 @@ directory: autoload, doc, plugin.
 ==============================================================================
 USAGE                                                            *yankwin-usage*
 
-This plugin provides a set of mappings to delete, yank, and paste "windows" in
+This plugin provides a set of mappings to delete, yank, and paste windows in
 a similar way that normal text is yanked and pasted around. This is done
 simply by yanking the window's path in the given register (which means this
 doesn't really work for special buffers like the quickfix window).
@@ -68,7 +68,7 @@ mappings that don't override existing ones (or override ones that are not as
 useful), feel free to open an issue at
 https://github.com/AndrewRadev/yankwin.vim/issues.
 
-Deleting and yanking ~
+Yanking and deleting ~
 
 The only difference between deleting and yanking is whether the window is
 closed after it's yanked. If you're currently on the fifth line in the file

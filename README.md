@@ -1,6 +1,6 @@
 ## Usage
 
-This plugin provides a set of mappings to delete, yank, and paste "windows" in a similar way that normal text is yanked and pasted around. This is done simply by yanking the window's path in the given register (which means this doesn't really work for special buffers like the quickfix window).
+This plugin provides a set of mappings to delete, yank, and paste windows in a similar way that normal text is yanked and pasted around. This is done simply by yanking the window's path in the given register (which means this doesn't really work for special buffers like the quickfix window).
 
 All the mappings are prefixed with `<c-w>` and attempt to be consistent both internally and with similar mappings in Vim. For instance, if you wanted to move a buffer from one tab to the other, you could delete it from its location with `<c-w>d` and then paste it in the right tab with `<c-w>p`.
 
@@ -23,7 +23,7 @@ let g:yankwin_default_delete_mappings = 0
 
 Check the full documentation for these settings to learn how to define your own, any way you like. If you have a proposal for a better set of window mappings that don't override existing ones (or override ones that are not as useful), feel free to open an issue at https://github.com/AndrewRadev/yankwin.vim/issues.
 
-### Deleting and yanking
+### Yanking and deleting
 
 The only difference between deleting and yanking is whether the window is closed after it's yanked. If you're currently on the fifth line in the file "foo/bar.txt" in your home directory, "/home/me", then the provided mappings would yank the following into the unnamed register:
 
