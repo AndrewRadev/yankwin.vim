@@ -77,7 +77,7 @@ A lot of the use cases for this plugin can be replicated with built-ins. For ins
 
 So why use this plugin instead? Here's a few reasons:
 
-1. A consistent interface. The defaultset of mappings is internally consistent and easy to remember and apply. It's similar to the existing workflow of deleting/yanking/pasting text, which might make it nicer to work with than remembering a different mapping for every use case.
+1. A consistent interface. The default set of mappings is internally consistent and easy to remember and apply. It's similar to the existing workflow of deleting/yanking/pasting text, which might make it nicer to work with than remembering a different mapping for every use case.
 
 2. Yanking file paths. To my knowledge, there's no built-in mapping to yank a file path to the clipboard, short of running something like `:let @+ = expand('%:p')`, which is quite verbose. The plugin provides various ways to yank file paths for usage with external programs (like, say, running tests on this particular test file, for this particular line).
 
