@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/AndrewRadev/yankwin.vim.png?branch=master)](http://travis-ci.org/AndrewRadev/yankwin.vim)
+
 ## Usage
 
 This plugin provides a set of mappings to delete, yank, and paste windows in a similar way that normal text is yanked and pasted around. This is done simply by yanking the window's path in the given register (which means this doesn't really work for special buffers like the quickfix window).
