@@ -68,6 +68,62 @@ of mappings you prefer:
     nnoremap <c-w>gP    :call pastewin#Paste({'edit_command': 'tab split'})<cr>
 <
 
+                                            *g:pastewin_default_delete_mappings*
+>
+    let g:pastewin_default_delete_mappings = 0
+<
+Default value: 1
+
+Set this to 0 to disable the built-in mappings for deleting, allowing you to
+set your own. Here's a complete list of them -- change the left-hand sides to
+whatever set of mappings you prefer:
+>
+    nnoremap <c-w>d  :call pastewin#Delete({'path_type': 'relative', 'with_line_number': 0})<cr>
+    nnoremap <c-w>gd :call pastewin#Delete({'path_type': 'absolute', 'with_line_number': 0})<cr>
+    nnoremap <c-w>D  :call pastewin#Delete({'path_type': 'relative', 'with_line_number': 1})<cr>
+    nnoremap <c-w>gD :call pastewin#Delete({'path_type': 'absolute', 'with_line_number': 1})<cr>
+<
+
+                                              *g:pastewin_default_yank_mappings*
+>
+    let g:pastewin_default_yank_mappings = 0
+<
+Default value: 1
+
+Set this to 0 to disable the built-in yank mappings, allowing you to set your
+own. Here's a complete list of them -- change the left-hand sides to whatever
+set of mappings you prefer:
+>
+    nnoremap <c-w>y  :call pastewin#Yank({'path_type': 'relative', 'with_line_number': 0})<cr>
+    nnoremap <c-w>gy :call pastewin#Yank({'path_type': 'absolute', 'with_line_number': 0})<cr>
+    nnoremap <c-w>Y  :call pastewin#Yank({'path_type': 'relative', 'with_line_number': 1})<cr>
+    nnoremap <c-w>gY :call pastewin#Yank({'path_type': 'absolute', 'with_line_number': 1})<cr>
+<
+                                             *g:pastewin_default_paste_mappings*
+>
+    let g:pastewin_default_paste_mappings = 0
+<
+Default value: 1
+
+Set this to 0 to disable the built-in paste mappings, allowing you to set your own.
+Here's a complete list of them -- change the left-hand sides to whatever set
+of mappings you prefer:
+>
+    nnoremap <c-w><c-p> :call pastewin#Paste({'edit_command': 'edit'})<cr>
+    nnoremap <c-w>p     :call pastewin#Paste({'edit_command': 'leftabove split'})<cr>
+    nnoremap <c-w>P     :call pastewin#Paste({'edit_command': 'rightbelow split'})<cr>
+    nnoremap <c-w>gp    :call pastewin#Paste({'edit_command': '-tab split'})<cr>
+    nnoremap <c-w>gP    :call pastewin#Paste({'edit_command': 'tab split'})<cr>
+<
+Note that you can create a different mapping by providing a different
+"edit_command" to the `pastewin#Paste` function. If you wanted to create
+mappings to paste in a vertical split, you could add something like this to
+your vimrc:
+>
+    nnoremap <c-w>vp :call pastewin#Paste({'edit_command': 'leftabove vertical split'})<cr>
+    nnoremap <c-w>vP :call pastewin#Paste({'edit_command': 'rightbelow vertical split'})<cr>
+<
+
                                            *g:pastewin_only_allow_pasting_paths*
 >
     let g:pastewin_only_allow_pasting_paths = 0
