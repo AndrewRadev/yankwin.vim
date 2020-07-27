@@ -123,6 +123,19 @@ yank the current filename to the "a" register. The |clipboard| setting should
 also be fully respected, so yanking and pasting files from and to the
 clipboard should work just fine.
 
+If you'd like to yank to both clipboards by default, you could set the
+`clipboard` setting to "unnamed,unnamedplus", but that forces you to always
+paste from "+", which can be inconvenient. You can override the setting for
+"clipboard" on yank by using the |g:yankwin_yank_clipboard| setting:
+
+>
+    " yank to both clipboards:
+    let g:yankwin_yank_clipboard = 'unnamed,unnamedplus'
+
+    " but paste from "*"
+    set clipboard=unnamed
+<
+
 Paste processors ~
 
 One of the reasons this plugin was created was to enable pasting file paths in
@@ -307,6 +320,25 @@ to `{}` to avoid any kind of processing on the pasted file path. If you'd like
 to use the existing patterns, and add to them, use the setting
 |g:yankwin_custom_paste_processors|
 
+                                                      *g:yankwin_yank_clipboard*
+>
+    let g:yankwin_yank_clipboard = 'unnamed,unnamedplus'
+<
+Default value: ''
+
+The plugin respects the value of the global |clipboard| setting, so it will
+use either the "*" or "+" clipboard depending on it. However, if you'd like to
+override it only for this plugin, you can set this variable to its desired
+value.
+
+As an example:
+>
+    " normally, yank to (and paste from) the * clipboard:
+    set clipboard=unnamed
+
+    " with yankwin, yank to both clipboards:
+    let g:yankwin_yank_clipboard = 'unnamed,unnamedplus'
+<
 
                                              *g:yankwin_custom_paste_processors*
 >

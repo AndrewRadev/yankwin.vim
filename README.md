@@ -63,6 +63,16 @@ Note that there are some conflicts with potentially interesting mappings. You mi
 
 All mappings respect the provided register. For example, typing `"a<c-w>y` will yank the current filename to the "a" register. The `clipboard` setting should also be fully respected, so yanking and pasting files from and to the clipboard should work just fine.
 
+If you'd like to yank to *both* clipboards by default, you could set the `clipboard` setting to "unnamed,unnamedplus", but that forces you to always paste from "+", which can be inconvenient. You can override the setting for "clipboard" on yank by using the `g:yankwin_yank_clipboard` setting:
+
+``` vim
+" yank to both clipboards:
+let g:yankwin_yank_clipboard = 'unnamed,unnamedplus'
+
+" but paste from "*"
+set clipboard=unnamed
+```
+
 ### Paste processors
 
 One of the reasons this plugin was created was to enable pasting file paths in different formats, potentially from outside sources into Vim. The plugin provides two settings, `g:yankwin_paste_processors` and `g:yankwin_custom_paste_processors`, that contain a set of definitions for some pre-paste processing of any file paths that are pasted.

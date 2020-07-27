@@ -32,9 +32,16 @@ describe "Different 'clipboard' settings" do
   end
 
   specify "clipboard=unnamed,unnamedplus" do
-    pending "Note sure why it doesn't work"
-
     vim.command('set clipboard=unnamed,unnamedplus')
+    vim.feedkeys '\<c-w>y'
+
+    expect(get_register('*')).to eq 'first.txt'
+    expect(get_register('+')).to eq 'first.txt'
+  end
+
+  specify "clipboard=, with custom yank clipboard setting" do
+    vim.command('set clipboard=')
+    vim.command('let g:yankwin_yank_clipboard = "unnamed,unnamedplus"')
     vim.feedkeys '\<c-w>y'
 
     expect(get_register('*')).to eq 'first.txt'

@@ -26,6 +26,10 @@ if !exists('g:yankwin_only_allow_pasting_paths')
   let g:yankwin_only_allow_pasting_paths = 1
 endif
 
+if !exists('g:yankwin_yank_clipboard')
+  let g:yankwin_yank_clipboard = ''
+endif
+
 if !exists('g:yankwin_paste_processors')
   let g:yankwin_paste_processors = {
         \ 'github\.com/\%(.\{-}\)/blob/\%([^/]\+\)/\(.\{-}\)\%(#L\(\d\+\)\%(-L\d\+\)\=\)\=$':

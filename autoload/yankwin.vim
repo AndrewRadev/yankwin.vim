@@ -14,7 +14,7 @@ function! yankwin#Delete(params)
 
   call setreg(register, path_description)
   if register == '"'
-    call s:SynchronizeClipboards()
+    call s:SynchronizeYankClipboards()
   endif
 
   echomsg 'Yankwin: Yanked "'.@@.'" to clipboard'
@@ -38,7 +38,7 @@ function! yankwin#Yank(params)
 
   call setreg(register, path_description)
   if register == '"'
-    call s:SynchronizeClipboards()
+    call s:SynchronizeYankClipboards()
   endif
 
   echomsg 'Yankwin: Yanked "'.@@.'" to clipboard'
@@ -95,12 +95,19 @@ function! s:GetPathDescription(params)
   return path_description
 endfunction
 
-function! s:SynchronizeClipboards()
-  let clipboard_setting = split(&clipboard)
-  if index(clipboard_setting, 'unnamed') >= 0
+function! s:SynchronizeYankClipboards()
+  if g:yankwin_yank_clipboard == ''
+    let clipboard_setting = &clipboard
+  else
+    let clipboard_setting = g:yankwin_yank_clipboard
+  endif
+
+  let clipboard_values = split(clipboard_setting, ',')
+
+  if index(clipboard_values, 'unnamed') >= 0
     call setreg('*', @@)
   endif
-  if index(clipboard_setting, 'unnamedplus') >= 0
+  if index(clipboard_values, 'unnamedplus') >= 0
     call setreg('+', @@)
   endif
 endfunction
