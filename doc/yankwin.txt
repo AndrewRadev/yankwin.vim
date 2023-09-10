@@ -116,6 +116,18 @@ might want to read the documentation for |g:yankwin_default_paste_mappings|
 to learn how to disable these and define your own. You can even define new
 ones that are not built-in, like ones that open windows in vertical splits.
 
+Terminal windows~
+
+Terminal windows only have `<c-w>d` and `<c-w>y` defined, since line numbers
+and absolute/relative paths don't really make sense there. "Deleting" a
+terminal window will only hide it, and "pasting" will show the buffer in a
+window with your preferred position. So, unlike normal windows, you can't take
+the path that corresponds to it, but you can still reorder a terminal window
+the same way, with the same mappings.
+
+Pasting, however, includes the full complement of mappings, since you should
+be able to paste anything above, below, etc, a terminal window.
+
 Registers ~
 
 All mappings respect the provided register. For example, typing "a<c-w>y will
@@ -214,16 +226,26 @@ of mappings you prefer:
     nnoremap <c-w>D  :call yankwin#Delete({'path_type': 'relative', 'with_line_number': 1})<cr>
     nnoremap <c-w>gD :call yankwin#Delete({'path_type': 'absolute', 'with_line_number': 1})<cr>
 
+    tnoremap <c-w>d  <c-w>:call yankwin#Delete({'path_type': 'terminal'})<cr>
+
     nnoremap <c-w>y  :call yankwin#Yank({'path_type': 'relative', 'with_line_number': 0})<cr>
     nnoremap <c-w>gy :call yankwin#Yank({'path_type': 'absolute', 'with_line_number': 0})<cr>
     nnoremap <c-w>Y  :call yankwin#Yank({'path_type': 'relative', 'with_line_number': 1})<cr>
     nnoremap <c-w>gY :call yankwin#Yank({'path_type': 'absolute', 'with_line_number': 1})<cr>
+
+    tnoremap <c-w>y  <c-w>:call yankwin#Yank({'path_type': 'terminal'})<cr>
 
     nnoremap <c-w><c-p> :call yankwin#Paste({'edit_command': 'edit'})<cr>
     nnoremap <c-w>p     :call yankwin#Paste({'edit_command': 'rightbelow split'})<cr>
     nnoremap <c-w>P     :call yankwin#Paste({'edit_command': 'leftabove split'})<cr>
     nnoremap <c-w>gp    :call yankwin#Paste({'edit_command': 'tab split'})<cr>
     nnoremap <c-w>gP    :call yankwin#Paste({'edit_command': (tabpagenr() - 1).'tab split'})<cr>
+
+    tnoremap <c-w><c-p> <c-w>:call yankwin#Paste({'edit_command': 'edit'})<cr>
+    tnoremap <c-w>p     <c-w>:call yankwin#Paste({'edit_command': 'rightbelow split'})<cr>
+    tnoremap <c-w>P     <c-w>:call yankwin#Paste({'edit_command': 'leftabove split'})<cr>
+    tnoremap <c-w>gp    <c-w>:call yankwin#Paste({'edit_command': 'tab split'})<cr>
+    tnoremap <c-w>gP    <c-w>:call yankwin#Paste({'edit_command': (tabpagenr() - 1).'tab split'})<cr>
 <
 
                                              *g:yankwin_default_delete_mappings*

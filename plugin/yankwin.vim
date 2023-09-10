@@ -49,6 +49,8 @@ if g:yankwin_default_mappings
     nnoremap <c-w>gd :call yankwin#Delete({'path_type': 'absolute', 'with_line_number': 0})<cr>
     nnoremap <c-w>D  :call yankwin#Delete({'path_type': 'relative', 'with_line_number': 1})<cr>
     nnoremap <c-w>gD :call yankwin#Delete({'path_type': 'absolute', 'with_line_number': 1})<cr>
+
+    tnoremap <c-w>d  <c-w>:call yankwin#Delete({'path_type': 'terminal'})<cr>
   endif
 
   if g:yankwin_default_yank_mappings
@@ -56,6 +58,8 @@ if g:yankwin_default_mappings
     nnoremap <c-w>gy :call yankwin#Yank({'path_type': 'absolute', 'with_line_number': 0})<cr>
     nnoremap <c-w>Y  :call yankwin#Yank({'path_type': 'relative', 'with_line_number': 1})<cr>
     nnoremap <c-w>gY :call yankwin#Yank({'path_type': 'absolute', 'with_line_number': 1})<cr>
+
+    tnoremap <c-w>y  <c-w>:call yankwin#Yank({'path_type': 'terminal'})<cr>
   endif
 
   if g:yankwin_default_paste_mappings
@@ -64,6 +68,12 @@ if g:yankwin_default_mappings
     nnoremap <c-w>P     :call yankwin#Paste({'edit_command': 'leftabove split'})<cr>
     nnoremap <c-w>gp    :call yankwin#Paste({'edit_command': 'tab split'})<cr>
     nnoremap <c-w>gP    :call yankwin#Paste({'edit_command': (tabpagenr() - 1).'tab split'})<cr>
+
+    tnoremap <c-w><c-p> <c-w>:call yankwin#Paste({'edit_command': 'edit'})<cr>
+    tnoremap <c-w>p     <c-w>:call yankwin#Paste({'edit_command': 'rightbelow split'})<cr>
+    tnoremap <c-w>P     <c-w>:call yankwin#Paste({'edit_command': 'leftabove split'})<cr>
+    tnoremap <c-w>gp    <c-w>:call yankwin#Paste({'edit_command': 'tab split'})<cr>
+    tnoremap <c-w>gP    <c-w>:call yankwin#Paste({'edit_command': (tabpagenr() - 1).'tab split'})<cr>
   endif
 endif
 

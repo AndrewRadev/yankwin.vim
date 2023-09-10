@@ -1,4 +1,6 @@
-function! yankwin#Delete(params)
+let s:termbuffer_pattern = '^termbuffer://\zs\d\+$'
+
+function! yankwin#Delete(params) abort
   let path_type = a:params.path_type
 
   if expand('%') == ''
@@ -18,12 +20,17 @@ function! yankwin#Delete(params)
   endif
 
   echomsg 'Yankwin: Yanked "'.@@.'" to clipboard'
-  quit
+
+  if path_type == 'terminal'
+    hide
+  else
+    quit
+  endif
 endfunction
 
-function! yankwin#Yank(params)
+function! yankwin#Yank(params) abort
   let path_type        = a:params.path_type
-  let with_line_number = a:params.with_line_number
+  let with_line_number = get(a:params, 'with_line_number', 0)
 
   if expand('%') == ''
     echomsg "Yankwin: No buffer to yank"
@@ -44,20 +51,36 @@ function! yankwin#Yank(params)
   echomsg 'Yankwin: Yanked "'.@@.'" to clipboard'
 endfunction
 
-function! yankwin#Paste(params)
+function! yankwin#Paste(params) abort
   let register = v:register
 
   let edit_command = a:params.edit_command
   let [path, line, col] = s:PrePasteProcess(getreg(register))
 
   if g:yankwin_only_allow_pasting_paths
-    if path !~ '^\f\+$'
+    if path !~ '^\f\+$' && path
       echoerr "Doesn't look like a file path: ".path
       return
     endif
   endif
 
-  exe edit_command.' '.path
+  if path =~# s:termbuffer_pattern
+    let bufnr = matchstr(path, s:termbuffer_pattern)
+
+    if edit_command == 'edit'
+      exe 'buffer '.bufnr
+    else
+      exe edit_command.' | buffer '.bufnr
+    endif
+  else
+    if edit_command == 'edit' && &buftype == 'terminal'
+      hide
+      exe 'split '.path
+    endif
+
+    exe edit_command.' '.path
+  endif
+
   if line != ''
     exe line
   endif
@@ -66,7 +89,7 @@ function! yankwin#Paste(params)
   endif
 endfunction
 
-function! s:GetYankRegisterName()
+function! s:GetYankRegisterName() abort
   if v:register == '+' || v:register == '*'
     " We set these manually upon writing, so just return the unnamed one
     return '"'
@@ -75,7 +98,7 @@ function! s:GetYankRegisterName()
   endif
 endfunction
 
-function! s:GetPathDescription(params)
+function! s:GetPathDescription(params) abort
   let path_type        = get(a:params, 'path_type', 'relative')
   let with_line_number = get(a:params, 'with_line_number', 0)
 
@@ -83,6 +106,8 @@ function! s:GetPathDescription(params)
     let path_description = expand('%:~:.')
   elseif path_type == 'absolute'
     let path_description = expand('%:p')
+  elseif path_type == 'terminal'
+    let path_description = 'termbuffer://'..bufnr()
   else
     echoerr "Yankwin: Unknown value for path_type: ".path_type
     return ''
@@ -95,7 +120,7 @@ function! s:GetPathDescription(params)
   return path_description
 endfunction
 
-function! s:SynchronizeYankClipboards()
+function! s:SynchronizeYankClipboards() abort
   if g:yankwin_yank_clipboard == ''
     let clipboard_setting = &clipboard
   else
@@ -112,7 +137,7 @@ function! s:SynchronizeYankClipboards()
   endif
 endfunction
 
-function! s:PrePasteProcess(text)
+function! s:PrePasteProcess(text) abort
   let path = a:text
   let line = ''
   let col = ''
