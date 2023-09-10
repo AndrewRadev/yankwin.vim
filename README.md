@@ -25,6 +25,12 @@ let g:yankwin_default_delete_mappings = 0
 
 Check the full documentation for these settings to learn how to define your own, any way you like. If you have a proposal for a better set of window mappings that don't override existing ones (or override ones that are not as useful), feel free to open an issue at https://github.com/AndrewRadev/yankwin.vim/issues.
 
+### Terminal windows
+
+Terminal windows only have `<c-w>d` and `<c-w>y` defined, since line numbers and absolute/relative paths don't really make sense there. "Deleting" a terminal window will only hide it, and "pasting" will show the buffer in a window with your preferred position. So, unlike normal windows, you can't take the path that corresponds to it, but you can still reorder a terminal window the same way, with the same mappings.
+
+Pasting, however, includes the full complement of mappings, since you should be able to paste anything above, below, etc, a terminal window.
+
 ### Yanking and deleting
 
 The only difference between deleting and yanking is whether the window is closed after it's yanked. If you're currently on the fifth line in the file "foo/bar.txt" in your home directory, "/home/me", then the provided mappings would yank the following into the unnamed register:
