@@ -107,4 +107,4 @@ The plugin is not complicated, however. If you take a look at the settings, you'
 
 ## Contributing
 
-Pull requests are welcome, but take a look at [CONTRIBUTING.md](https://github.com/AndrewRadev/yankwin.vim/blob/master/CONTRIBUTING.md) first for some guidelines.
+Pull requests are welcome, as long as they **did not involve any LLM usage**. Take a look at [CONTRIBUTING.md](https://github.com/AndrewRadev/yankwin.vim/blob/master/CONTRIBUTING.md) first for some guidelines.
